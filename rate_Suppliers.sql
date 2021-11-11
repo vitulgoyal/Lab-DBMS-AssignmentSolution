@@ -1,0 +1,9 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RATE_SUPPLIERS`()
+BEGIN
+	select S.SUPP_ID,S.SUPP_NAME,R.RAT_RATSTARS,
+    CASE 
+		when R.RAT_RATSTARS > 4 then 'GENUINE SUPPLIER'
+        when R.RAT_RATSTARS > 2 then 'AVERAGE SUPPLIER'
+        else 'BAD SUPPLIER'
+        END AS verdict from RATING R inner join SUPPLIER S on S.SUPP_ID=R.SUPP_ID;
+END
